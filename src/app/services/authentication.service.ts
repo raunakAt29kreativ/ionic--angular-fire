@@ -19,8 +19,12 @@ export class AuthenticationService {
     });
   }
 
-  registerUser(email: string, password: string) {
-    return this.ngFireAuth.createUserWithEmailAndPassword(email,password)
+  registerUser(name: string, email: string, password: string) {
+    return this.ngFireAuth.createUserWithEmailAndPassword(email,password).then((res) => {
+      return res.user?.updateProfile({
+        displayName: name!
+      })
+    })
   }
 
   async sendVerificationMail() {
@@ -37,6 +41,14 @@ export class AuthenticationService {
   
   singOut() {
     return this.ngFireAuth.signOut();
+  }
+
+  verifyEmail(code: any) {
+    return this.ngFireAuth.applyActionCode(code)
+  }
+
+  changePassword(code: any, password: string) {
+    return this.ngFireAuth.confirmPasswordReset(code,password);
   }
 
   async getProfile() {

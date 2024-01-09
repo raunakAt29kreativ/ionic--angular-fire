@@ -5,7 +5,7 @@
   </div>
   <form [formGroup]="regForm">
     <div class="ion-padding">
-      <!-- <ion-item>
+      <ion-item>
         <ion-input
           type="name"
           formControlName="name"
@@ -20,7 +20,7 @@
         <ion-text *ngIf="errorControl['name']?.errors?.['required']">
           Name is required
         </ion-text>
-      </div> -->
+      </div>
       <ion-item>
         <ion-input
           type="email"
@@ -60,6 +60,27 @@
           and number
         </ion-text>
       </div>
+      <ion-item>
+        <ion-input
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+          class="input"
+        ></ion-input>
+        <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+      </ion-item>
+      <div
+        *ngIf="this.regForm.controls['confirmPassword']?.touched && (this.regForm.controls['confirmPassword']?.invalid || this.regForm?.errors?.['PasswordNoMatch'])"
+      >
+        <ion-text *ngIf="errorControl['confirmPassword']?.errors?.['required']">
+          Confimr-Password is required
+        </ion-text>
+        <ion-text
+          *ngIf="this.regForm?.errors?.['PasswordNoMatch'] && !errorControl['confirmPassword']?.errors?.['required']"
+        >
+          Passwords do not match
+        </ion-text>
+      </div>
       <div>
         <p>
           Already a member?<a [routerLink]="['/login']">{{" "}}Signin now</a>
@@ -67,7 +88,7 @@
       </div>
     </div>
     <ion-fab vertical="bottom" horizontal="end" class="ion-margin-bottom">
-      <ion-fab-button (click)="signUp()">
+      <ion-fab-button (click)="signUp()" [disabled]="this.regForm.invalid">
         <ion-icon name="chevron-forward"></ion-icon
       ></ion-fab-button>
     </ion-fab>

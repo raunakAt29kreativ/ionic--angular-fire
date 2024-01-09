@@ -41,6 +41,14 @@ const routes: Routes = [
         (m) => m.VerifyEmailPageModule
       ),
   },
+  {
+    path: 'email-verification',
+    loadChildren: () => import('./pages/email-verification/email-verification.module').then( m => m.EmailVerificationPageModule)
+  },
+  {
+    path: 'new-password',
+    loadChildren: () => import('./pages/new-password/new-password.module').then( m => m.NewPasswordPageModule)
+  },
 ];
 
 @NgModule({

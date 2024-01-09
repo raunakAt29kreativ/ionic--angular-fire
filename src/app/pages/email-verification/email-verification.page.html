@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Email verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h3>{{message}}</h3>
+  <ion-card class="ion-padding ion-margin-top" *ngIf="isVerified">
+    <ion-item
+      ><a [routerLink]="['/login']" class="ion-margin"
+        >Please login to the app
+      </a></ion-item
+    >
+  </ion-card>
+</ion-content>
